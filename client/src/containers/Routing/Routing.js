@@ -1,20 +1,27 @@
-import React from 'react'
-import { createBrowserRouter } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import AppLayout from '../AppLayout/AppLayout';
+import Home from '../Shop/Home/Home';
+import AddProduct from '../Admin/AddProduct/AddProduct';
+import Cart from '../Shop/Cart/Cart';
+import Orders from '../Shop/Orders/Orders';
+import Products from '../Admin/Products/Products';
 import ErrorPage from '../AppLayout/ErrorPage';
-import Home from '../Home/Home';
-import AddProduct from '../AddProduct/AddProduct';
+import Header from '../Header/Header';
 
-const Routing = createBrowserRouter([
-    {
-        path: "/",
-        element: <Home />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: "/add-product",
-        element: <AddProduct />,
-        errorElement: <ErrorPage />
-    },
-])
+const Routing = () => (
+    <AppLayout>
+        <Header />
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/admin/add-product" element={<AddProduct />} />
+            <Route path="/admin/products" element={<Products />} />
+            <Route path="*" element={<ErrorPage />} />
+        </Routes>
+    </AppLayout>
+);
 
-export default Routing
+export default Routing;
