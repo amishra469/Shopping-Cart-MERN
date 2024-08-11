@@ -30,7 +30,7 @@ module.exports = class Product {
     save() {
         getProductFromFile(products => {
             products.push(this);
-            fs.writeFile(p, JsON.stringify(products), err => {
+            fs.writeFile(p, JSON.stringify(products), err => {
                 console.log(err);
             });
         });
