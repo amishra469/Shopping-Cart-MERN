@@ -1,0 +1,30 @@
+.product-details-container {
+    display: flex;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.image-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-image {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.details-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-title {
+    margin: 0 0 10px;
+    font-size: 24px;
+}

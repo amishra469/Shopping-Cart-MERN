@@ -8,6 +8,15 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
+exports.getProductById = (req, res, next) => {
+    const prodId = req.params.productId;
+    Product.findById(prodId, products => {
+        res.json({
+            products: products
+        });
+    });
+};
+
 exports.getIndex = (req, res, next) => {
     Product.fetchAll(products => {
         res.json({

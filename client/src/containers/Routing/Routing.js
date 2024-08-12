@@ -9,6 +9,7 @@ import Products from '../Admin/Products/Products';
 import ErrorPage from '../AppLayout/ErrorPage';
 import Header from '../Header/Header';
 import ProductList from '../Shop/ProductList/ProductList';
+import ProductDetails from '../Shop/ProductDetails/ProductDetails';
 
 const Routing = () => (
     <AppLayout>
@@ -16,6 +17,7 @@ const Routing = () => (
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductList />} />
+            <Route path="/productdetails" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/admin/add-product" element={<AddProduct />} />

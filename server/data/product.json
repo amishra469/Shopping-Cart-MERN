@@ -1,1 +1,16 @@
-[{"title":"The Hunter","imageUrl":"https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?cs=srgb&dl=pexels-pixabay-159866.jpg&fm=jpg","description":"Comics","price":"40"},{"title":"The Hunter","imageUrl":"https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?cs=srgb&dl=pexels-pixabay-159866.jpg&fm=jpg","description":"Comics","price":"40"}]
+[
+    {
+        "id": "101",
+        "title": "The Hunter",
+        "imageUrl": "https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?cs=srgb&dl=pexels-pixabay-159866.jpg&fm=jpg",
+        "description": "Comics",
+        "price": "40"
+    },
+    {
+        "id": "102",
+        "title": "The Hunter",
+        "imageUrl": "https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?cs=srgb&dl=pexels-pixabay-159866.jpg&fm=jpg",
+        "description": "Comics",
+        "price": "40"
+    }
+]
