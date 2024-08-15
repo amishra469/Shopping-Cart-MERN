@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './ProductDetails.css';
+import AddToCart from '../Cart/AddToCart';
 
 const ProductDetails = () => {
     const [product, setProduct] = useState({
@@ -44,10 +45,6 @@ const ProductDetails = () => {
         fetchProductList();
     }, [id]);
 
-    const handleAddToCart = (product) => {
-        console.log(product)
-    }
-
     return (
         <div className="product-details-container">
             <div className="image-container">
@@ -59,11 +56,7 @@ const ProductDetails = () => {
                 <p><strong>ID:</strong> {product.id || ""}</p>
                 <p><strong>Description:</strong> {product.description || ""}</p>
                 <p><strong>Price:</strong> ${product.price || ""}</p>
-
-                {/* Add to Cart Button */}
-                <button className="add-to-cart-button" onClick={() => handleAddToCart(product)}>
-                    Add to Cart
-                </button>
+                <AddToCart id={product.id} />
             </div>
         </div>
     );

@@ -14,6 +14,8 @@ router.get('/products/delete');
 
 router.get('/products/:productId', shopController.getProductById);
 
+router.post('/cart', shopController.postCart);
+
 router.get('/cart', shopController.getCart);
 
 router.get('/orders', shopController.getOrders);

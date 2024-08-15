@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import AddToCart from '../Cart/AddToCart';
 
 const ProductList = () => {
     const [productList, setProductList] = useState([]);
@@ -47,7 +48,7 @@ const ProductList = () => {
                             <p className="card-text">Rs {item.price}</p>
                             <div style={{ display: 'flex', justifyContent: "space-evenly" }}>
                                 <button className="btn-add-to-cart" onClick={() => getItemDetails(item)}>Details</button>
-                                <button className="btn-add-to-cart">Add to Cart</button>
+                                <AddToCart id={item.id} />
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css'; // Import the CSS file
+import AddToCart from '../Cart/AddToCart';
 
 const Home = () => {
     const [productList, setProductList] = useState([]);
@@ -40,7 +41,7 @@ const Home = () => {
                             <h5 className="card-title">{item.title}</h5>
                             <p className="card-text">{item.description}</p>
                             <p className="card-text">Rs {item.price}</p>
-                            <button className="btn-add-to-cart">Add to Cart</button>
+                            <AddToCart id={item.id} />
                         </div>
                     </div>
                 ))}
