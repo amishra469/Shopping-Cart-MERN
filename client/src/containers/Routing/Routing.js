@@ -4,12 +4,12 @@ import AppLayout from '../AppLayout/AppLayout';
 import Home from '../Shop/Home/Home';
 import Cart from '../Shop/Cart/Cart';
 import Orders from '../Shop/Orders/Orders';
+import Products from '../Admin/Products/Products';
 import ErrorPage from '../AppLayout/ErrorPage';
 import Header from '../Header/Header';
 import ProductList from '../Shop/ProductList/ProductList';
 import ProductDetails from '../Shop/ProductDetails/ProductDetails';
-import Products from '../Admin/Products';
-import EditProduct from '../Admin/EditProduct';
+import EditProduct from '../Admin/EditProduct/EditProduct';
 
 const Routing = () => (
     <AppLayout>
