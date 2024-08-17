@@ -2,7 +2,6 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AppLayout from '../AppLayout/AppLayout';
 import Home from '../Shop/Home/Home';
-import AddProduct from '../Admin/AddProduct/AddProduct';
 import Cart from '../Shop/Cart/Cart';
 import Orders from '../Shop/Orders/Orders';
 import Products from '../Admin/Products/Products';
@@ -10,6 +9,7 @@ import ErrorPage from '../AppLayout/ErrorPage';
 import Header from '../Header/Header';
 import ProductList from '../Shop/ProductList/ProductList';
 import ProductDetails from '../Shop/ProductDetails/ProductDetails';
+import EditProduct from '../Admin/EditProduct/EditProduct';
 
 const Routing = () => (
     <AppLayout>
@@ -20,8 +20,8 @@ const Routing = () => (
             <Route path="/productdetails" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/admin/add-product" element={<AddProduct />} />
             <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/edit-product" element={<EditProduct />} />
             <Route path="*" element={<ErrorPage />} />
         </Routes>
     </AppLayout>

@@ -41,3 +41,11 @@ exports.getProducts = (req, res, next) => {
         });
     });
 };
+
+exports.deleteProducts = (req, res, next) => {
+    Product.fetchAll(products => {
+        res.json({
+            products: products
+        });
+    });
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import './Header.css'; 
 
 const Header = () => {
     const location = useLocation();
@@ -26,11 +27,13 @@ const Header = () => {
                         <li className="nav-item">
                             <Link className={`nav-link ${currentPath === "/orders" ? "active" : ""}`} to="/orders">Orders</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className={`nav-link ${currentPath === "/admin/add-product" ? "active" : ""}`} to="/admin/add-product">Add Product</Link>
-                        </li>
+                    </ul>
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <Link className={`nav-link ${currentPath === "/admin/products" ? "active" : ""}`} to="/admin/products">Admin Products</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className={`nav-link ${currentPath === "/admin/edit-product" ? "active" : ""}`} to="/admin/edit-product">Add Product</Link>
                         </li>
                     </ul>
                 </div>
