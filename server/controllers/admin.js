@@ -19,7 +19,7 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-    const prodId = req.body.prodId;
+    const prodId = req.body.id;
     const updatedTitle = req.body.title;
     const updatedPrice = req.body.price;
     const updatedImageUrl = req.body.imageUrl;
@@ -43,9 +43,9 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.deleteProducts = (req, res, next) => {
-    Product.fetchAll(products => {
-        res.json({
-            products: products
-        });
+    const prodId = req.body.id;
+    Product.deleteById(prodId);
+    res.status(202).json({
+        message: 'Product Deleted successfully',
     });
 };
