@@ -27,15 +27,30 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-    res.json({
-        cartItems: []
+    const cartProducts = [];
+    Cart.getCart(cart => {
+        Product.fetchAll(products => {
+            for (let product of products) {
+                const cartProductData = cart.products.find((prod) => {
+                    return prod.id === product.id
+                }
+                );
+                if (cartProductData) {
+                    cartProducts.push({ productData: product, qty: cartProductData.qty });
+                }
+
+            };
+            res.json({
+                cartProducts: cartProducts,
+                totalAmount : cart.totalPrice
+            });
+        });
     });
+
 };
 
 exports.postCart = (req, res, next) => {
-    console.log(req.body)
     const prodId = req.body.productId;
-    console.log(prodId)
     Product.findById(prodId, product => {
         Cart.addProduct(prodId, product.price);
         res.json({
