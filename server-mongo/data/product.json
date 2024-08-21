@@ -1,0 +1,72 @@
+[
+    {
+        "id": "201",
+        "title": "The Adventure",
+        "imageUrl": "https://images.pexels.com/photos/3225513/pexels-photo-3225513.jpeg",
+        "description": "An exciting adventure book.",
+        "price": "25"
+    },
+    {
+        "id": "202",
+        "title": "The Mystery",
+        "imageUrl": "https://images.pexels.com/photos/2939190/pexels-photo-2939190.jpeg",
+        "description": "A thrilling mystery novel.",
+        "price": "30"
+    },
+    {
+        "id": "203",
+        "title": "Science Fiction",
+        "imageUrl": "https://images.pexels.com/photos/207216/pexels-photo-207216.jpeg",
+        "description": "A mind-bending science fiction story.",
+        "price": "35"
+    },
+    {
+        "id": "204",
+        "title": "Historical Fiction",
+        "imageUrl": "https://images.pexels.com/photos/2904500/pexels-photo-2904500.jpeg",
+        "description": "A captivating historical fiction novel.",
+        "price": "40"
+    },
+    {
+        "id": "205",
+        "title": "The Classic",
+        "imageUrl": "https://images.pexels.com/photos/2561780/pexels-photo-2561780.jpeg",
+        "description": "A classic tale that never gets old.",
+        "price": "20"
+    },
+    {
+        "id": "206",
+        "title": "Romantic Journey",
+        "imageUrl": "https://images.pexels.com/photos/2832435/pexels-photo-2832435.jpeg",
+        "description": "A heartwarming romance novel.",
+        "price": "28"
+    },
+    {
+        "id": "207",
+        "title": "Fantasy World",
+        "imageUrl": "https://images.pexels.com/photos/2340936/pexels-photo-2340936.jpeg",
+        "description": "A journey into an enchanting fantasy world.",
+        "price": "32"
+    },
+    {
+        "id": "208",
+        "title": "Biography",
+        "imageUrl": "https://images.pexels.com/photos/3408745/pexels-photo-3408745.jpeg",
+        "description": "An inspiring biography of a notable figure.",
+        "price": "27"
+    },
+    {
+        "id": "209",
+        "title": "Self-Help Guide",
+        "imageUrl": "https://images.pexels.com/photos/4049937/pexels-photo-4049937.jpeg",
+        "description": "A helpful guide for personal development.",
+        "price": "22"
+    },
+    {
+        "id": "210",
+        "title": "Cookbook",
+        "imageUrl": "https://images.pexels.com/photos/5876124/pexels-photo-5876124.jpeg",
+        "description": "A collection of delicious recipes.",
+        "price": "26"
+    }
+]
