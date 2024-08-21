@@ -1,9 +1,10 @@
 const Product = require('../models/product');
 const Cart = require('../models/cart');
+const Orders = require('../models/orders');
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll(products => {
-        res.json({
+        resres.status(200).json({
             products: products
         });
     });
@@ -12,7 +13,7 @@ exports.getProducts = (req, res, next) => {
 exports.getProductById = (req, res, next) => {
     const prodId = req.params.productId;
     Product.findById(prodId, products => {
-        res.json({
+        res.status(200).json({
             products: products
         });
     });
@@ -20,7 +21,7 @@ exports.getProductById = (req, res, next) => {
 
 exports.getIndex = (req, res, next) => {
     Product.fetchAll(products => {
-        res.json({
+        resres.status(200).json({
             products: products
         });
     });
@@ -40,9 +41,9 @@ exports.getCart = (req, res, next) => {
                 }
 
             };
-            res.json({
+            res.status(200).json({
                 cartProducts: cartProducts,
-                totalAmount : cart.totalPrice
+                totalAmount: cart.totalPrice
             });
         });
     });
@@ -53,16 +54,56 @@ exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
     Product.findById(prodId, product => {
         Cart.addProduct(prodId, product.price);
-        res.json({
+        res.status(201).json({
             products: product
         });
     });
 };
 
 exports.getOrders = (req, res, next) => {
-    res.json({
-        orders: []
+    const orderProducts = [];
+    Orders.getOrder(order => {
+        Product.fetchAll(products => {
+            for (let product of products) {
+                const orderProductData = order.products.find((prod) => {
+                    return prod.id === product.id
+                }
+                );
+                if (orderProductData) {
+                    orderProducts.push({ productData: product, edd: orderProductData.edd });
+                }
+            };
+            
+            res.status(200).json({
+                orderProducts: orderProducts
+            });
+        });
     });
+};
+
+const getRandomDate = () => {
+    const randomDays = Math.floor(Math.random() * 10) + 1;
+    const date = new Date();
+    date.setDate(date.getDate() + randomDays);
+    let expectedDate =
+        date.getFullYear() + "-" +
+        ("00" + (date.getMonth() + 1)).slice(-2) + "-" +
+        ("00" + date.getDate()).slice(-2) + " " +
+        ("00" + date.getHours()).slice(-2) + ":" +
+        ("00" + date.getMinutes()).slice(-2) + ":" +
+        ("00" + date.getSeconds()).slice(-2);
+
+    return expectedDate;
+}
+
+
+exports.postOrders = (req, res, next) => {
+    const orderDetails = req.body.orderdetails;
+    let newOrders = orderDetails.forEach(order => {
+        order.edd = getRandomDate();
+    });
+    Orders.addOrder(newOrders);
+    res.status(201).json(newOrders);
 };
 
 exports.getCheckout = (req, res, next) => {
