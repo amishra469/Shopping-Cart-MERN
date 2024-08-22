@@ -103,7 +103,6 @@ exports.postOrders = (req, res, next) => {
         order.edd = getRandomDate();
         return order;
     });
-    console.log("newOrders", newOrders)
     Orders.addOrder(newOrders);
     res.status(201).json({
         newOrders: newOrders
