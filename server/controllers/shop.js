@@ -4,7 +4,7 @@ const Orders = require('../models/orders');
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll(products => {
-        resres.status(200).json({
+        res.status(200).json({
             products: products
         });
     });
@@ -21,7 +21,7 @@ exports.getProductById = (req, res, next) => {
 
 exports.getIndex = (req, res, next) => {
     Product.fetchAll(products => {
-        resres.status(200).json({
+        res.status(200).json({
             products: products
         });
     });
@@ -70,10 +70,10 @@ exports.getOrders = (req, res, next) => {
                 }
                 );
                 if (orderProductData) {
-                    orderProducts.push({ productData: product, edd: orderProductData.edd });
+                    orderProducts.push({ productData: product, qty: orderProductData.qty, edd: orderProductData.edd });
                 }
             };
-            
+
             res.status(200).json({
                 orderProducts: orderProducts
             });
@@ -99,11 +99,15 @@ const getRandomDate = () => {
 
 exports.postOrders = (req, res, next) => {
     const orderDetails = req.body.orderdetails;
-    let newOrders = orderDetails.forEach(order => {
+    let newOrders = orderDetails.map(order => {
         order.edd = getRandomDate();
+        return order;
     });
+    console.log("newOrders", newOrders)
     Orders.addOrder(newOrders);
-    res.status(201).json(newOrders);
+    res.status(201).json({
+        newOrders: newOrders
+    });
 };
 
 exports.getCheckout = (req, res, next) => {

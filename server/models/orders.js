@@ -14,7 +14,7 @@ module.exports = class Orders {
             if (!err) {
                 orders = JSON.parse(fileContent);
             }
-            orders.products = [...orders.products, newOrders];
+            orders.products = [...orders.products, ...newOrders];
 
             fs.writeFile(p, JSON.stringify(orders), (err) => {
                 console.log(err)
