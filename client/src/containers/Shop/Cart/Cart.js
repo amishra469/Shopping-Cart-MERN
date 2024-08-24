@@ -17,10 +17,6 @@ const Cart = () => {
         }
     };
 
-    useEffect(() => {
-        fetchCartData();
-    }, []);
-
     const handleDecrement = (id) => {
         setCartData(prevCartData => {
             const updatedProducts = prevCartData.cartProducts.map(item => {
@@ -87,12 +83,15 @@ const Cart = () => {
     };
 
 
-    // useEffect(() => {
-    //     // Cleanup function to run on unmount
-    //     return () => {
-    //         saveChanges();
-    //     };
-    // }, []);
+    useEffect(() => {
+        fetchCartData();
+
+        return () => {
+            saveChanges();
+        };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
     return (
@@ -113,7 +112,7 @@ const Cart = () => {
             ))}
             <div className="cart-total">
                 <div className="cart-total-amount">Total: Rs {cartData.totalAmount}</div>
-                <button className="btn-proceed" >Proceed to Checkout</button>
+                <button className="btn-proceed">Proceed to Checkout</button>
             </div>
         </div>
     );

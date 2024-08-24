@@ -30,6 +30,7 @@ const Home = () => {
     useEffect(() => {
         fetchProductList();
     }, [])
+    
 
     return (
         <div className="home-container">
