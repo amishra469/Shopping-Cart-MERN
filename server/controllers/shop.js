@@ -60,6 +60,15 @@ exports.postCart = (req, res, next) => {
     });
 };
 
+exports.updateCart = (req, res, next) => {
+    const cartDetails = req.body.cartDetails;
+    Cart.updateCart(cartDetails);
+    res.status(201).json({
+        updatedCart: cartDetails
+    });
+};
+
+
 exports.getOrders = (req, res, next) => {
     const orderProducts = [];
     Orders.getOrder(order => {

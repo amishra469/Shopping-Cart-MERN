@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 const Cart = () => {
     const [cartData, setCartData] = useState({ cartProducts: [], totalAmount: 0 });
-    const [pendingUpdates, setPendingUpdates] = useState({});
 
     const fetchCartData = async () => {
         try {
@@ -41,12 +40,6 @@ const Cart = () => {
                 totalAmount: updatedProducts.reduce((sum, item) => sum + item.qty * item.productData.price, 0),
             };
         });
-
-        // Update the pendingUpdates state
-        setPendingUpdates(prevUpdates => ({
-            ...prevUpdates,
-            [id]: (prevUpdates[id] || 0) - 1
-        }));
     };
 
     const handleIncrement = (id) => {
@@ -64,36 +57,43 @@ const Cart = () => {
                 totalAmount: updatedProducts.reduce((sum, item) => sum + item.qty * item.productData.price, 0),
             };
         });
-
-        // Update the pendingUpdates state
-        setPendingUpdates(prevUpdates => ({
-            ...prevUpdates,
-            [id]: (prevUpdates[id] || 0) + 1
-        }));
     };
 
     const saveChanges = async () => {
-        // Send the batch update to the API
+        const updatedCart = {
+            products: cartData.cartProducts.map(item => ({
+                id: item.productData.id,
+                qty: item.qty
+            })),
+            totalPrice: cartData.totalAmount
+        };
+
         try {
             const response = await fetch('http://localhost:8080/cart/update', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(pendingUpdates),
+                body: JSON.stringify({ cartDetails: updatedCart }),
             });
 
             if (!response.ok) {
                 throw new Error('Failed to update cart');
             }
 
-            // Optionally, fetch the updated cart data
-            fetchCartData();
-
         } catch (error) {
             console.error(error);
         }
     };
+
+
+    // useEffect(() => {
+    //     // Cleanup function to run on unmount
+    //     return () => {
+    //         saveChanges();
+    //     };
+    // }, []);
+
 
     return (
         <div className="cart-container">
@@ -113,7 +113,7 @@ const Cart = () => {
             ))}
             <div className="cart-total">
                 <div className="cart-total-amount">Total: Rs {cartData.totalAmount}</div>
-                <button className="btn-proceed" onClick={saveChanges}>Proceed to Checkout</button>
+                <button className="btn-proceed" >Proceed to Checkout</button>
             </div>
         </div>
     );

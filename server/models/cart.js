@@ -68,4 +68,10 @@ module.exports = class Cart {
             }
         });
     }
+
+    static updateCart(cardData) {
+        fs.writeFile(p, JSON.stringify(cardData), err => {
+            console.log(err);
+        });
+    }
 }
