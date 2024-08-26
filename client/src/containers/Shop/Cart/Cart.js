@@ -1,10 +1,12 @@
 import './Cart.css';
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 const Cart = () => {
     const [cartData, setCartData] = useState({ cartProducts: [], totalAmount: 0 });
     const cartRef = useRef(null);
     cartRef.current = cartData;
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const fetchCartData = async () => {
         try {
@@ -84,7 +86,6 @@ const Cart = () => {
         }
     };
 
-
     useEffect(() => {
         fetchCartData();
 
@@ -95,6 +96,12 @@ const Cart = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleProceedToCheckout = () => {
+        const confirmed = window.confirm("Are you sure you want to proceed to checkout?");
+        if (confirmed) {
+            navigate('/orders'); // Redirect to orders page
+        }
+    };
 
     return (
         <div className="cart-container">
@@ -114,7 +121,7 @@ const Cart = () => {
             ))}
             <div className="cart-total">
                 <div className="cart-total-amount">Total: Rs {cartData.totalAmount}</div>
-                <button className="btn-proceed">Proceed to Checkout</button>
+                <button className="btn-proceed" onClick={handleProceedToCheckout}>Proceed to Checkout</button>
             </div>
         </div>
     );
