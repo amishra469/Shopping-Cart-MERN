@@ -34,25 +34,26 @@ const Orders = () => {
     }
 
     return (
-        <div className="cart-container">
-            {orderProducts.map((order) => (
-                <div key={order.productData.id} className="cart-item">
-                    <div className="cart-item-content">
-                        <div className="image-container">
-                            <img src={order.productData.imageUrl} alt={order.productData.title} className="cart-item-image" />
+        <div className="orders-container">
+            <h2 className="orders-header">Your Orders</h2>
+            <div className="orders-list">
+                {orderProducts.map((order) => (
+                    <div key={order.productData.id} className="order-card">
+                        <div className="order-image">
+                            <img src={order.productData.imageUrl} alt={order.productData.title} className="order-card-image" />
                         </div>
-                        <div className="cart-item-details">
-                            <div className="cart-item-title">{order.productData.title}</div>
-                            <div className="cart-item-description">{order.productData.description}</div>
-                            <div className="cart-item-info">
-                                <p className="cart-item-price">Price: Rs {order.productData.price}</p>
-                                <p className="cart-item-quantity">Quantity: {order.qty}</p>
-                                <p className="cart-item-edd">Estimated Delivery: {new Date(order.edd).toLocaleDateString()}</p>
+                        <div className="order-content">
+                            <h3 className="order-title">{order.productData.title}</h3>
+                            <p className="order-description">{order.productData.description}</p>
+                            <div className="order-info">
+                                <p className="order-price">Price: <strong>${order.productData.price}</strong></p>
+                                <p className="order-quantity">Quantity: <strong>{order.qty}</strong></p>
+                                <p className="order-edd">Estimated Delivery: <strong>{new Date(order.edd).toLocaleString()}</strong></p>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };
