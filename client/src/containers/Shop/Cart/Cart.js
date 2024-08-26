@@ -1,8 +1,10 @@
 import './Cart.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Cart = () => {
     const [cartData, setCartData] = useState({ cartProducts: [], totalAmount: 0 });
+    const cartRef = useRef(null);
+    cartRef.current = cartData;
 
     const fetchCartData = async () => {
         try {
@@ -57,11 +59,11 @@ const Cart = () => {
 
     const saveChanges = async () => {
         const updatedCart = {
-            products: cartData.cartProducts.map(item => ({
+            products: cartRef.current.cartProducts.map(item => ({
                 id: item.productData.id,
                 qty: item.qty
             })),
-            totalPrice: cartData.totalAmount
+            totalPrice: cartRef.current.totalAmount
         };
 
         try {
