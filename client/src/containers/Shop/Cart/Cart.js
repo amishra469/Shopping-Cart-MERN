@@ -59,30 +59,32 @@ const Cart = () => {
         });
     };
 
-    const saveChanges = async () => {
-        const updatedCart = {
-            products: cartRef.current.cartProducts.map(item => ({
+    const handleProceedToCheckout = async () => {
+        const confirmed = window.confirm("Are you sure you want to proceed to checkout?");
+        if (confirmed) {
+            const cartItems = cartRef.current.cartProducts.map(item => ({
                 id: item.productData.id,
                 qty: item.qty
-            })),
-            totalPrice: cartRef.current.totalAmount
-        };
+            }));
 
-        try {
-            const response = await fetch('http://localhost:8080/cart/update', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ cartDetails: updatedCart }),
-            });
+            try {
+                const response = await fetch('http://localhost:8080/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ orderdetails: cartItems }),
+                });
 
-            if (!response.ok) {
-                throw new Error('Failed to update cart');
+                if (!response.ok) {
+                    throw new Error('Failed to complete checkout');
+                }
+
+                navigate('/orders');
+            } catch (error) {
+                console.error(error);
+                alert('Failed to proceed with checkout. Please try again.');
             }
-
-        } catch (error) {
-            console.error(error);
         }
     };
 
@@ -90,18 +92,11 @@ const Cart = () => {
         fetchCartData();
 
         return () => {
-            saveChanges();
+            // Save cart changes here if needed
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const handleProceedToCheckout = () => {
-        const confirmed = window.confirm("Are you sure you want to proceed to checkout?");
-        if (confirmed) {
-            navigate('/orders'); // Redirect to orders page
-        }
-    };
 
     return (
         <div className="cart-container">
