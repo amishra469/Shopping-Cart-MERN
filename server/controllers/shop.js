@@ -71,15 +71,15 @@ exports.updateCart = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
     const orderProducts = [];
-    Orders.getOrder(order => {
+    Orders.getOrder(orders => {
         Product.fetchAll(products => {
-            for (let product of products) {
-                const orderProductData = order.products.find((prod) => {
-                    return prod.id === product.id
+            for (let order of orders.products) {
+                const orderProductData = products.find((prod) => {
+                    return prod.id === order.id
                 }
                 );
                 if (orderProductData) {
-                    orderProducts.push({ productData: product, qty: orderProductData.qty, edd: orderProductData.edd });
+                    orderProducts.push({ productData: orderProductData, qty: order.qty, edd: order.edd });
                 }
             };
 
