@@ -1,12 +1,13 @@
 import './Cart.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const [cartData, setCartData] = useState({ cartProducts: [], totalAmount: 0 });
+    const [isCheckout, setIsCheckout] = useState(false);
     const cartRef = useRef(null);
     cartRef.current = cartData;
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     const fetchCartData = async () => {
         try {
@@ -62,6 +63,7 @@ const Cart = () => {
     const handleProceedToCheckout = async () => {
         const confirmed = window.confirm("Are you sure you want to proceed to checkout?");
         if (confirmed) {
+            setIsCheckout(true);
             const cartItems = cartRef.current.cartProducts.map(item => ({
                 id: item.productData.id,
                 qty: item.qty
@@ -88,11 +90,37 @@ const Cart = () => {
         }
     };
 
+    const updateCart = async () => {
+        console.log({isCheckout})
+        let cart = [];
+        if (isCheckout === false) {
+            cart = cartRef.current.cartProducts.map(item => ({
+                id: item.productData.id,
+                qty: item.qty
+            }));
+        }
+
+        try {
+            await fetch('http://localhost:8080/cart/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    cartDetails: {
+                        products: [...cart]
+                    }
+                }),
+            });
+        } catch (error) {
+            console.error("Failed to update cart:", error);
+        }
+    };
+
     useEffect(() => {
         fetchCartData();
-
         return () => {
-            // Save cart changes here if needed
+            updateCart();
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

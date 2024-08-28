@@ -37,8 +37,8 @@ const Orders = () => {
         <div className="orders-container">
             <h2 className="orders-header">Your Orders</h2>
             <div className="orders-list">
-                {orderProducts.map((order) => (
-                    <div key={order.productData.id} className="order-card">
+                {orderProducts.map((order, index) => (
+                    <div key={order.productData.id + "-" + index} className="order-card">
                         <div className="order-image">
                             <img src={order.productData.imageUrl} alt={order.productData.title} className="order-card-image" />
                         </div>
