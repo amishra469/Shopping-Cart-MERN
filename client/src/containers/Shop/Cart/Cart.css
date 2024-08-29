@@ -105,3 +105,41 @@
 .btn-proceed:hover {
     background-color: #218838;
 }
+
+.cart-empty {
+    text-align: center;
+    margin-top: 50px;
+    padding: 40px;
+    border: 2px dashed #ccc;
+    background-color: #fdfdfd;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.cart-empty h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.cart-empty p {
+    font-size: 18px;
+    color: #666;
+}
+
+.cart-empty button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-empty button:hover {
+    background-color: #0056b3;
+}

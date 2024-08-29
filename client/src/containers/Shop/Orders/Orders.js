@@ -34,25 +34,33 @@ const Orders = () => {
     }
 
     return (
-        <div className="orders-container">
-            <h2 className="orders-header">Your Orders</h2>
-            <div className="orders-list">
-                {orderProducts.map((order, index) => (
-                    <div key={order.productData.id + "-" + index} className="order-card">
-                        <div className="order-image">
-                            <img src={order.productData.imageUrl} alt={order.productData.title} className="order-card-image" />
-                        </div>
-                        <div className="order-content">
-                            <h3 className="order-title">{order.productData.title}</h3>
-                            <p className="order-description">{order.productData.description}</p>
-                            <div className="order-info">
-                                <p className="order-price">Price: <strong>${order.productData.price}</strong></p>
-                                <p className="order-quantity">Quantity: <strong>{order.qty}</strong></p>
-                                <p className="order-edd">Estimated Delivery: <strong>{new Date(order.edd).toLocaleString()}</strong></p>
-                            </div>
-                        </div>
+        <div className="orders-wrapper">
+            <div className="orders-container">
+                {orderProducts.length === 0 ? (
+                    <div className="orders-empty">
+                        <h3>No Order Found</h3>
+                        <p>Your order list is empty. Please check back later.</p>
                     </div>
-                ))}
+                ) : (
+                    <div className="orders-list">
+                        {orderProducts.map((order, index) => (
+                            <div key={order.productData.id + "-" + index} className="order-card">
+                                <div className="order-image">
+                                    <img src={order.productData.imageUrl} alt={order.productData.title} className="order-card-image" />
+                                </div>
+                                <div className="order-content">
+                                    <h3 className="order-title">{order.productData.title}</h3>
+                                    <p className="order-description">{order.productData.description}</p>
+                                    <div className="order-info">
+                                        <p className="order-price">Price: <strong>${order.productData.price}</strong></p>
+                                        <p className="order-quantity">Quantity: <strong>{order.qty}</strong></p>
+                                        <p className="order-edd">Estimated Delivery: <strong>{new Date(order.edd).toLocaleString()}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

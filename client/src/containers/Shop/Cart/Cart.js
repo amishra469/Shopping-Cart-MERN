@@ -28,12 +28,12 @@ const Cart = () => {
                 if (item.productData.id === id) {
                     const newQty = item.qty - 1;
                     if (newQty <= 0) {
-                        return null; // Mark this item for removal
+                        return null;
                     }
                     return { ...item, qty: newQty };
                 }
                 return item;
-            }).filter(item => item !== null); // Remove items with quantity 0
+            }).filter(item => item !== null);
 
             return {
                 ...prevCartData,
@@ -111,24 +111,34 @@ const Cart = () => {
 
     return (
         <div className="cart-container">
-            {cartData.cartProducts.map((item, index) => (
-                <div key={item.productData.id + index} className="cart-item">
-                    <img src={item.productData.imageUrl} alt={item.productData.title} className="cart-item-image" />
-                    <div className="cart-item-details">
-                        <div className="cart-item-title">{item.productData.title}</div>
-                        <div className="cart-item-price">Rs {item.productData.price}</div>
+            {cartData.cartProducts.length > 0 ? (
+                <>
+                    {cartData.cartProducts.map((item, index) => (
+                        <div key={item.productData.id + index} className="cart-item">
+                            <img src={item.productData.imageUrl} alt={item.productData.title} className="cart-item-image" />
+                            <div className="cart-item-details">
+                                <div className="cart-item-title">{item.productData.title}</div>
+                                <div className="cart-item-price">Rs {item.productData.price}</div>
+                            </div>
+                            <div className="cart-item-right">
+                                <button className="qty-btn" onClick={() => handleDecrement(item.productData.id)}>-</button>
+                                <span className="cart-item-quantity">{item.qty}</span>
+                                <button className="qty-btn" onClick={() => handleIncrement(item.productData.id)}>+</button>
+                            </div>
+                        </div>
+                    ))}
+                    <div className="cart-total">
+                        <div className="cart-total-amount">Total: Rs {cartData.totalAmount}</div>
+                        <button className="btn-proceed" onClick={handleProceedToCheckout}>Proceed to Checkout</button>
                     </div>
-                    <div className="cart-item-right">
-                        <button className="qty-btn" onClick={() => handleDecrement(item.productData.id)}>-</button>
-                        <span className="cart-item-quantity">{item.qty}</span>
-                        <button className="qty-btn" onClick={() => handleIncrement(item.productData.id)}>+</button>
-                    </div>
+                </>
+            ) : (
+                <div className="cart-empty">
+                    <h2>Your cart is empty</h2>
+                    <p>It looks like you haven't added any items to your cart yet.</p>
+                    <button onClick={() => navigate('/')}>Start Shopping</button>
                 </div>
-            ))}
-            <div className="cart-total">
-                <div className="cart-total-amount">Total: Rs {cartData.totalAmount}</div>
-                <button className="btn-proceed" onClick={handleProceedToCheckout}>Proceed to Checkout</button>
-            </div>
+            )}
         </div>
     );
 };
