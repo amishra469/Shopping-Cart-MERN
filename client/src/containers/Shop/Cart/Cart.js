@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const [cartData, setCartData] = useState({ cartProducts: [], totalAmount: 0 });
-    const [isCheckout, setIsCheckout] = useState(false);
     const cartRef = useRef(null);
-    cartRef.current = cartData;
     const navigate = useNavigate();
+    const isNavigating = useRef(false);
+    cartRef.current = cartData;
 
     const fetchCartData = async () => {
         try {
@@ -63,37 +63,20 @@ const Cart = () => {
     const handleProceedToCheckout = async () => {
         const confirmed = window.confirm("Are you sure you want to proceed to checkout?");
         if (confirmed) {
-            setIsCheckout(true);
-            const cartItems = cartRef.current.cartProducts.map(item => ({
-                id: item.productData.id,
-                qty: item.qty
-            }));
-
+            isNavigating.current = true;
             try {
-                const response = await fetch('http://localhost:8080/orders', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ orderdetails: cartItems }),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to complete checkout');
-                }
-
+                await updateCart(true);
                 navigate('/orders');
             } catch (error) {
-                console.error(error);
-                alert('Failed to proceed with checkout. Please try again.');
+                console.error('Failed to proceed with checkout:', error);
+                isNavigating.current = false;
             }
         }
     };
 
-    const updateCart = async () => {
-        console.log({isCheckout})
+    const updateCart = async (isCheckout = false) => {
         let cart = [];
-        if (isCheckout === false) {
+        if (!isCheckout) {
             cart = cartRef.current.cartProducts.map(item => ({
                 id: item.productData.id,
                 qty: item.qty
@@ -120,10 +103,10 @@ const Cart = () => {
     useEffect(() => {
         fetchCartData();
         return () => {
-            updateCart();
+            if (!isNavigating.current) {
+                updateCart();
+            }
         };
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
