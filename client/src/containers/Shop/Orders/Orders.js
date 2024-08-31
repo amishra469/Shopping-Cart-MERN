@@ -9,7 +9,7 @@ const Orders = () => {
     useEffect(() => {
         const fetchOrderDetails = async () => {
             try {
-                const response = await fetch('http://localhost:8080/orders'); // Replace with your API URL
+                const response = await fetch('http://localhost:8080/orders');
                 if (!response.ok) {
                     throw new Error('Failed to fetch order details');
                 }
@@ -44,11 +44,11 @@ const Orders = () => {
                 ) : (
                     <div className="orders-list">
                         {orderProducts.map((order, index) => (
-                            <div key={order.productData.id + "-" + index} className="order-card">
+                            <div key={order.productData.id + "-" + index} className="order-row">
                                 <div className="order-image">
-                                    <img src={order.productData.imageUrl} alt={order.productData.title} className="order-card-image" />
+                                    <img src={order.productData.imageUrl} alt={order.productData.title} className="order-row-image" />
                                 </div>
-                                <div className="order-content">
+                                <div className="order-details">
                                     <h3 className="order-title">{order.productData.title}</h3>
                                     <p className="order-description">{order.productData.description}</p>
                                     <div className="order-info">
