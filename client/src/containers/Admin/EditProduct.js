@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import './Products.css';
 
 const EditProduct = () => {
@@ -58,13 +56,10 @@ const EditProduct = () => {
                 throw new Error('Network response was not ok');
             }
 
-            const result = await response.json();
-            console.log('Server Response:', result);
-            toast.success('Product saved successfully!'); // Show success toast
+            await response.json();
             navigate('/admin/products'); // Redirect after success
         } catch (error) {
             console.error('Error:', error);
-            toast.error('Failed to save product. Please try again.'); // Show error toast
         } finally {
             setLoading(false);
         }
@@ -126,7 +121,6 @@ const EditProduct = () => {
                     {loading ? 'Saving...' : state?.product ? 'Update Product' : 'Add Product'}
                 </button>
             </form>
-            <ToastContainer /> {/* Add ToastContainer component */}
         </div>
     );
 };

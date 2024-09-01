@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import './Header.css'; 
+import ThemeToggle from "../../components/ThemeToggle"
+import './Header.css';
 
 const Header = () => {
     const location = useLocation();
@@ -34,6 +35,9 @@ const Header = () => {
                         </li>
                         <li className="nav-item">
                             <Link className={`nav-link ${currentPath === "/admin/edit-product" ? "active" : ""}`} to="/admin/edit-product">Add Product</Link>
+                        </li>
+                        <li>
+                            <ThemeToggle />
                         </li>
                     </ul>
                 </div>
