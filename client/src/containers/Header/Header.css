@@ -1,25 +1,7 @@
-.navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+body.light .navbar-toggler-icon {
+    filter: invert(0);
 }
 
-.navbar-brand {
-    font-weight: bold;
-}
-
-.navbar-nav .nav-link {
-    margin-right: 15px;
-    color: #333;
-    font-weight: 500;
-}
-
-.navbar-nav .nav-link.active {
-    color: #007bff;
-}
-
-.navbar-nav .nav-item:last-child {
-    margin-right: 0;
-}
-
-.navbar-nav.ms-auto .nav-item {
-    margin-left: 15px;
+body.dark .navbar-toggler-icon {
+    filter: invert(1);
 }

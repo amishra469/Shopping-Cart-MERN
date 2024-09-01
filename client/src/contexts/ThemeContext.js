@@ -1,14 +1,16 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
-const themes = {
+export const themes = {
     light: {
         background: '#ffffff',
         color: '#000000',
+        linkActiveColor: '#007bff',
     },
     dark: {
-        background: '#000000',
+        background: '#333333',
         color: '#ffffff',
+        linkActiveColor: '#66afe9',
     },
 };
 
@@ -22,6 +24,10 @@ const ThemeProvider = ({ children }) => {
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
     }
+
+    useEffect(() => {
+        document.body.className = theme.name;
+    }, [theme]);
 
     return (
         <ThemeContext.Provider value={{ toggleTheme }}>
