@@ -3,14 +3,18 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 export const themes = {
     light: {
-        background: '#ffffff',
-        color: '#000000',
-        linkActiveColor: '#007bff',
+        background: '#f8f9fa',   // Light theme page background
+        color: '#333333',        // Light theme text and border color
+        linkActiveColor: '#007bff', // Link active color
+        buttonBackground: '#007bff', // Light theme button background
+        buttonHoverBackground: '#0056b3', // Light theme button hover background
     },
     dark: {
-        background: '#333333',
-        color: '#ffffff',
-        linkActiveColor: '#66afe9',
+        background: '#333333',   // Dark theme page background
+        color: '#ffffff',        // Dark theme text and border color
+        linkActiveColor: '#66afe9', // Link active color
+        buttonBackground: '#333333;', // Dark theme button background
+        buttonHoverBackground: '#1459a8', // Dark theme button hover background
     },
 };
 
