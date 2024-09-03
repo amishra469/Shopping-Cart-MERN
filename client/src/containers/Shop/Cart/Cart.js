@@ -1,6 +1,11 @@
-import './Cart.css';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+    CartContainer, CartItem, CartItemImage, CartItemDetails,
+    CartItemTitle, CartItemPrice, CartItemRight, QtyButton,
+    CartItemQuantity, CartTotal, CartTotalAmount, ProceedButton,
+    CartEmpty, CartEmptyTitle, CartEmptyText, StartShoppingButton
+} from './CartStyle';
 
 const Cart = () => {
     const [cartData, setCartData] = useState({ cartProducts: [], totalAmount: 0 });
@@ -110,36 +115,36 @@ const Cart = () => {
     }, []);
 
     return (
-        <div className="cart-container">
+        <CartContainer>
             {cartData.cartProducts.length > 0 ? (
                 <>
                     {cartData.cartProducts.map((item, index) => (
-                        <div key={item.productData.id + index} className="cart-item">
-                            <img src={item.productData.imageUrl} alt={item.productData.title} className="cart-item-image" />
-                            <div className="cart-item-details">
-                                <div className="cart-item-title">{item.productData.title}</div>
-                                <div className="cart-item-price">Rs {item.productData.price}</div>
-                            </div>
-                            <div className="cart-item-right">
-                                <button className="qty-btn" onClick={() => handleDecrement(item.productData.id)}>-</button>
-                                <span className="cart-item-quantity">{item.qty}</span>
-                                <button className="qty-btn" onClick={() => handleIncrement(item.productData.id)}>+</button>
-                            </div>
-                        </div>
+                        <CartItem key={item.productData.id + index}>
+                            <CartItemImage src={item.productData.imageUrl} alt={item.productData.title} />
+                            <CartItemDetails>
+                                <CartItemTitle>{item.productData.title}</CartItemTitle>
+                                <CartItemPrice>Rs {item.productData.price}</CartItemPrice>
+                            </CartItemDetails>
+                            <CartItemRight>
+                                <QtyButton onClick={() => handleDecrement(item.productData.id)}>-</QtyButton>
+                                <CartItemQuantity>{item.qty}</CartItemQuantity>
+                                <QtyButton onClick={() => handleIncrement(item.productData.id)}>+</QtyButton>
+                            </CartItemRight>
+                        </CartItem>
                     ))}
-                    <div className="cart-total">
-                        <div className="cart-total-amount">Total: Rs {cartData.totalAmount}</div>
-                        <button className="btn-proceed" onClick={handleProceedToCheckout}>Proceed to Checkout</button>
-                    </div>
+                    <CartTotal>
+                        <CartTotalAmount>Total: Rs {cartData.totalAmount}</CartTotalAmount>
+                        <ProceedButton onClick={handleProceedToCheckout}>Proceed to Checkout</ProceedButton>
+                    </CartTotal>
                 </>
             ) : (
-                <div className="cart-empty">
-                    <h2>Your cart is empty</h2>
-                    <p>It looks like you haven't added any items to your cart yet.</p>
-                    <button onClick={() => navigate('/')}>Start Shopping</button>
-                </div>
+                <CartEmpty>
+                    <CartEmptyTitle>Your cart is empty</CartEmptyTitle>
+                    <CartEmptyText>It looks like you haven't added any items to your cart yet.</CartEmptyText>
+                    <StartShoppingButton onClick={() => navigate('/')}>Start Shopping</StartShoppingButton>
+                </CartEmpty>
             )}
-        </div>
+        </CartContainer>
     );
 };
 
